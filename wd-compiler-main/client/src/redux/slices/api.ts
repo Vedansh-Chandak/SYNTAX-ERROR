@@ -63,12 +63,13 @@ export const api = createApi({
       providesTags: ["myCodes"],
     }),
     deleteCode: builder.mutation<void, string>({
-      query: (_id) => ({
-        url: `/compiler/delete/${_id}`,
+      query: (id) => ({
+        url: `/compiler/delete/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["myCodes", "allCodes"],
+      invalidatesTags: [{ type: "myCodes" }, { type: "allCodes" }],
     }),
+    
     editCode: builder.mutation<
       void,
       { fullCode: CompilerSliceStateType["fullCode"]; id: string }

@@ -1,5 +1,5 @@
 import { Code, Trash2 } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "../components/ui/separator";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { codeType } from "@/vite-env";
@@ -10,8 +10,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { handleError } from "@/utils/handleError";
-import { useDeleteCodeMutation } from "@/redux/slices/api";
+import { handleError } from "../utils/handleError";
+import { useDeleteCodeMutation } from "../redux/slices/api";
 
 export default function CodeItem({
   data,
@@ -23,8 +23,13 @@ export default function CodeItem({
   const [deleteCode, { isLoading }] = useDeleteCodeMutation();
   const handleDelete = async () => {
     try {
-      const response = await deleteCode(data._id!).unwrap();
-      console.log(response);
+      if (data._id) {
+        const response = await deleteCode(data._id).unwrap();
+        console.log(response);
+      } else {
+        throw new Error("Code ID is undefined");
+      }
+      //console.log(response);
     } catch (error) {
       handleError(error);
     }

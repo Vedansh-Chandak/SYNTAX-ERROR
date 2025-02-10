@@ -1,4 +1,4 @@
-import CodeItem from "@/components/CodeItem";
+import CodeItem from "../components/CodeItem";
 import { useGetAllCodesQuery } from "@/redux/slices/api";
 
 export default function AllCodes() {
@@ -8,7 +8,7 @@ export default function AllCodes() {
     <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-3 p-3">
       {allCodes?.map((codeItem) => {
         return (
-          <CodeItem deleteBtn={false} key={codeItem._id} data={codeItem} />
+          <CodeItem deleteBtn={true} key={codeItem._id} data={codeItem} />
         );
       })}
     </div>
